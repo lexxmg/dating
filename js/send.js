@@ -6,6 +6,17 @@ const btn = document.createElement('button');
 btn.innerHTML = '<b>Отправить сообщение</b>';
 document.getElementById('composer').append(btn);
 
+if (localStorage.getItem('sendTrue') === 'true') {
+  localStorage.setItem('sendTrue', false);
+
+  sendMessage('Привет').then( (ms) => {
+    console.log(ms);
+    setTimeout(() => {
+      window.history.back(-1);
+    }, sleep);
+  });
+}
+
 btn.addEventListener('click', () => {
   sendMessage('Привет').then( (ms) => {
     console.log(ms);
