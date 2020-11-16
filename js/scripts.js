@@ -11,6 +11,8 @@ if ( document.getElementById('search_type') ) {
   document.getElementById('search_type').append(btnAuto);
 }
 
+setTimeout(auto, 2000);
+
 btnAuto.addEventListener('click', () => {
   try {
     const mass = findSelectorText('strong', 'Вес, кг:').nextSibling.nodeValue;
@@ -57,6 +59,29 @@ function findSelectorText(selector, text) {
   }
 
   return false;
+}
+
+function auto() {
+  try {
+    const mass = findSelectorText('strong', 'Вес, кг:').nextSibling.nodeValue;
+
+    if (+mass <= 60) {
+      console.log('Вес в норме');
+
+      localStorage.setItem('sendTrue', true);
+     //findSelectorText('a', 'Написать сообщение').click();
+      setTimeout(() => {
+        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+        findSelectorText('a', 'следующая').click();
+      }, 6000);
+
+      findSelectorText('a', 'Написать сообщение').click();
+    } else {
+      findSelectorText('a', 'следующая').click();
+    }
+  } catch(e) {
+    findSelectorText('a', 'следующая').click();
+  }
 }
 
 //sendMessage('Привет', (ms) => {console.log(ms)});
